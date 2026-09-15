@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Caerulean</title>
   <meta name="description" content="Caerulean is coming soon. We're building something worth waiting for." />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="img/caerulean-mark-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="img/caerulean-mark-180.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -15,7 +16,7 @@
   <header class="site-header">
     <nav class="nav container">
       <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <img class="brand-mark" src="img/caerulean-mark.png" alt="" width="30" height="30" />
         <span class="brand-name">Caerulean</span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -97,7 +98,10 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <span>&copy; <span id="year"></span> Caerulean. All rights reserved.</span>
+      <div class="footer-brand">
+        <img class="footer-logo" src="img/caerulean-wordmark.png" alt="Caerulean" />
+        <p class="footer-copyright">&copy; <span id="year"></span> Caerulean. All rights reserved.</p>
+      </div>
       <div class="footer-links">
         <a href="#top">Back to top</a>
       </div>
