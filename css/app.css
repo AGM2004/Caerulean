@@ -1,0 +1,634 @@
+/* Signed-in app (app.html). Builds on the tokens and components in styles.css. */
+
+[hidden] {
+  display: none !important;
+}
+
+.app-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+  padding: 40px 0 64px;
+}
+
+.app-loading {
+  text-align: center;
+  padding-top: 80px;
+}
+
+.app-main h1 {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  margin-bottom: 8px;
+}
+
+code {
+  font-size: 0.9em;
+  background: var(--bg-alt);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* Nav */
+
+.app-nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.app-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.app-nav a:hover {
+  color: var(--ink);
+}
+
+.app-nav a.active {
+  background: var(--bg-alt);
+  color: var(--ink);
+}
+
+.app-nav .nav-me {
+  padding: 4px;
+  margin-left: 6px;
+}
+
+.app-nav .nav-me.active {
+  box-shadow: 0 0 0 2px var(--teal-dark);
+}
+
+.badge {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--teal-dark);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Panels & forms */
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  margin: 24px auto 0;
+}
+
+.narrow {
+  max-width: 520px;
+}
+
+.center {
+  text-align: center;
+}
+
+.signin-mark {
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.app-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.field textarea {
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+}
+
+.field textarea:focus {
+  outline: none;
+  border-color: var(--teal-dark);
+  background: #fff;
+}
+
+.btn {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+}
+
+.btn-ghost {
+  border: 1.5px solid var(--border);
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.btn-google {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  background: #fff;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+}
+
+.btn-google:hover {
+  border-color: var(--teal-dark);
+}
+
+.btn-google svg {
+  width: 18px;
+  height: 18px;
+}
+
+.link-button {
+  display: block;
+  margin: 20px auto 0;
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.empty {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  margin: 0;
+  padding: 16px 0;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 100;
+}
+
+/* People */
+
+.view-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.view-head p {
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filters input {
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 9px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  min-width: 220px;
+}
+
+.filters input:focus {
+  outline: none;
+  border-color: var(--teal-dark);
+}
+
+.segmented {
+  display: inline-flex;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.segmented button {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.segmented button.active {
+  background: var(--ink);
+  color: #fff;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.person-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.person-bio {
+  font-size: 0.9rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.person-card .person-actions {
+  margin-top: auto;
+}
+
+.person-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.person-summary > div {
+  min-width: 0;
+}
+
+.person-name {
+  font-weight: 700;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.person-meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.role-tag {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 4px;
+}
+
+.role-creator {
+  background: rgba(20, 184, 166, 0.14);
+  color: var(--teal-dark);
+}
+
+.role-brand {
+  background: rgba(11, 31, 58, 0.08);
+  color: var(--ink);
+}
+
+.avatar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--ink) 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.avatar-sm {
+  width: 30px;
+  height: 30px;
+  font-size: 0.7rem;
+}
+
+.person-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.list-heading {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  margin: 32px 0 12px;
+}
+
+.person-list {
+  display: grid;
+  gap: 10px;
+}
+
+.person-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+}
+
+/* Messages */
+
+.messages-view {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  height: calc(100vh - 72px - 80px);
+  min-height: 420px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 0;
+  overflow: hidden;
+}
+
+.convo-list {
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.convo-list .empty {
+  padding: 16px;
+}
+
+.convo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.convo:hover {
+  background: var(--bg);
+}
+
+.convo.active {
+  background: var(--bg-alt);
+}
+
+.convo-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.convo-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.convo-top .person-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.convo-top time {
+  flex: none;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.convo-preview {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.convo.unread .convo-preview {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.convo.unread .convo-top time {
+  color: var(--teal-dark);
+  font-weight: 700;
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.thread-empty {
+  margin: auto;
+  max-width: 320px;
+  text-align: center;
+  padding: 24px;
+}
+
+.thread-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.thread-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.thread-back {
+  display: none;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.thread-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg);
+}
+
+.thread-messages .empty {
+  margin: auto;
+  text-align: center;
+}
+
+.bubble {
+  max-width: min(75%, 520px);
+  padding: 10px 14px;
+  border-radius: 16px;
+}
+
+.bubble p {
+  margin: 0;
+  color: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bubble time {
+  display: block;
+  font-size: 0.7rem;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.bubble.mine {
+  align-self: flex-end;
+  background: var(--ink);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.bubble.theirs {
+  align-self: flex-start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  border-bottom-left-radius: 4px;
+}
+
+.composer {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.composer textarea {
+  flex: 1;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg);
+  resize: none;
+  max-height: 160px;
+}
+
+.composer textarea:focus {
+  outline: none;
+  border-color: var(--teal-dark);
+  background: #fff;
+}
+
+/* Responsive */
+
+@media (max-width: 720px) {
+  .app-main {
+    padding-top: 24px;
+  }
+
+  .panel {
+    padding: 28px 20px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .app-nav a {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .filters,
+  .filters input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* One pane at a time: the list, or the open conversation. */
+  .messages-view {
+    grid-template-columns: 1fr;
+    margin: 0 16px;
+    height: calc(100vh - 72px - 48px);
+  }
+
+  .messages-view.has-thread .convo-list,
+  .messages-view:not(.has-thread) .thread {
+    display: none;
+  }
+
+  .convo-list {
+    border-right: none;
+  }
+
+  .thread-back {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-name {
+    display: none;
+  }
+}

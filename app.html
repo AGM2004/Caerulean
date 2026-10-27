@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caerulean — App</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="img/caerulean-mark-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="img/caerulean-mark-180.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body class="app-body">
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/caerulean-mark.png" alt="" width="30" height="30" />
+        <span class="brand-name">Caerulean</span>
+      </a>
+      <ul class="app-nav" id="appNav" hidden>
+        <li><a href="#discover" data-view="discover">Discover</a></li>
+        <li><a href="#requests" data-view="requests">Requests <span class="badge" id="requestsBadge" hidden></span></a></li>
+        <li><a href="#messages" data-view="messages">Messages <span class="badge" id="messagesBadge" hidden></span></a></li>
+        <li><a href="#profile" data-view="profile" class="nav-me" id="navMe" aria-label="Your profile"></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <p class="app-loading" id="loading">Loading…</p>
+
+    <!-- Supabase keys not filled in yet -->
+    <section class="view panel narrow" id="view-setup" hidden>
+      <h1>Almost there</h1>
+      <p>Messaging needs a Supabase project. Fill in <code>js/config.js</code> and follow the setup steps in the README.</p>
+      <a class="btn btn-ghost" href="index.html">Back to home</a>
+    </section>
+
+    <section class="view panel narrow center" id="view-signin" hidden>
+      <img src="img/caerulean-mark.png" alt="" width="56" height="56" class="signin-mark" />
+      <h1>Sign in to Caerulean</h1>
+      <p>Connect with creators and brands, and message the people you've connected with.</p>
+      <button class="btn btn-google" id="googleSignIn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.2-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6h-4a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9Z"/></svg>
+        Continue with Google
+      </button>
+      <p class="form-status error" id="signinStatus" role="status"></p>
+    </section>
+
+    <section class="view panel narrow" id="view-profile" hidden>
+      <h1 id="profileTitle">Set up your profile</h1>
+      <p id="profileIntro">Tell people who you are so the right creators and brands can find you.</p>
+      <form class="app-form" id="profileForm">
+        <fieldset class="role-toggle">
+          <legend class="visually-hidden">I am a</legend>
+          <label><input type="radio" name="role" value="creator" checked /> <span>I'm a creator</span></label>
+          <label><input type="radio" name="role" value="brand" /> <span>I'm a brand</span></label>
+        </fieldset>
+        <label class="field">
+          <span data-creator-label="Your name" data-brand-label="Brand name">Your name</span>
+          <input type="text" name="display_name" maxlength="80" required />
+        </label>
+        <label class="field">
+          <span data-creator-label="Main handle or channel link" data-brand-label="Company website">Main handle or channel link</span>
+          <input type="text" name="handle" maxlength="200" data-creator-placeholder="@yourhandle" data-brand-placeholder="yourcompany.com" />
+        </label>
+        <label class="field">
+          <span>Niche</span>
+          <input type="text" name="niche" maxlength="120" placeholder="e.g. Fitness, Gaming, Skincare" />
+        </label>
+        <label class="field">
+          <span>About</span>
+          <textarea name="bio" rows="4" maxlength="1000" data-creator-placeholder="Your content, your audience, the kinds of sponsors you're looking for." data-brand-placeholder="What you sell, who you want to reach, the kinds of creators you work with."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">Save profile</button>
+        <p class="form-status" id="profileStatus" role="status" aria-live="polite"></p>
+      </form>
+      <button class="link-button" id="signOut" type="button" hidden>Sign out</button>
+    </section>
+
+    <section class="view container" id="view-discover" hidden>
+      <div class="view-head">
+        <div>
+          <h1>Discover</h1>
+          <p>Find creators and brands, and send a request to connect.</p>
+        </div>
+        <div class="filters">
+          <input type="search" id="search" placeholder="Search name, niche…" aria-label="Search" />
+          <div class="segmented" id="roleFilter" role="group" aria-label="Show">
+            <button type="button" data-role="all" class="active">All</button>
+            <button type="button" data-role="creator">Creators</button>
+            <button type="button" data-role="brand">Brands</button>
+          </div>
+        </div>
+      </div>
+      <div class="people-grid" id="peopleGrid"></div>
+    </section>
+
+    <section class="view container" id="view-requests" hidden>
+      <div class="view-head">
+        <div>
+          <h1>Requests</h1>
+          <p>Accept a request to start messaging.</p>
+        </div>
+      </div>
+      <h2 class="list-heading">Received</h2>
+      <div class="person-list" id="incomingList"></div>
+      <h2 class="list-heading">Sent</h2>
+      <div class="person-list" id="outgoingList"></div>
+      <h2 class="list-heading">Connections</h2>
+      <div class="person-list" id="connectedList"></div>
+    </section>
+
+    <section class="view container messages-view" id="view-messages" hidden>
+      <aside class="convo-list" id="convoList" aria-label="Conversations"></aside>
+      <div class="thread" id="thread">
+        <div class="thread-empty" id="threadEmpty">
+          <p>Select a conversation, or connect with someone on <a href="#discover">Discover</a> to start one.</p>
+        </div>
+        <div class="thread-inner" id="threadInner" hidden>
+          <header class="thread-head">
+            <a href="#messages" class="thread-back" aria-label="Back to conversations">&larr;</a>
+            <div id="threadPerson"></div>
+          </header>
+          <div class="thread-messages" id="threadMessages" aria-live="polite"></div>
+          <form class="composer" id="composer">
+            <textarea name="body" rows="1" maxlength="4000" placeholder="Write a message…" aria-label="Message" required></textarea>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
