@@ -213,6 +213,209 @@ a {
   color: var(--teal-dark);
 }
 
+.btn-light {
+  background: #fff;
+  color: var(--ink);
+}
+
+.btn-light:hover {
+  background: var(--teal);
+  color: #fff;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.section-sub {
+  max-width: 560px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Hero paths */
+
+.hero-paths {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+  max-width: 600px;
+}
+
+.path-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 48px 20px 22px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.path-card:hover {
+  border-color: var(--teal-dark);
+  transform: translateY(-2px);
+}
+
+.path-label {
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.path-desc {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.path-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--teal-dark);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* How it works */
+
+.how {
+  padding: 72px 0;
+  background: var(--bg-alt);
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--ink) 100%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.step h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.step p {
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* Audiences */
+
+.audiences {
+  padding: 72px 0;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.audience-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  scroll-margin-top: 96px;
+}
+
+.audience-card h2 {
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+}
+
+.audience-card-dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.audience-card-dark .eyebrow {
+  color: var(--teal);
+}
+
+.audience-card-dark .checklist li {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.checklist li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.checklist li::after {
+  content: "";
+  position: absolute;
+  left: 4.5px;
+  top: 9px;
+  width: 7px;
+  height: 4px;
+  border-left: 1.8px solid #fff;
+  border-bottom: 1.8px solid #fff;
+  transform: rotate(-45deg);
+}
+
 /* About */
 
 .about {
@@ -344,19 +547,129 @@ a {
   margin: 0;
 }
 
-/* Contact */
+/* Waitlist */
 
-.contact {
+.waitlist {
   padding: 88px 0;
+  background:
+    radial-gradient(60% 60% at 50% 0%, rgba(20, 184, 166, 0.12), transparent),
+    var(--bg-alt);
+}
+
+.waitlist-inner {
+  max-width: 560px;
   text-align: center;
 }
 
-.contact-inner {
-  max-width: 520px;
+.waitlist h2 {
+  margin-bottom: 12px;
 }
 
-.contact h2 {
-  margin-bottom: 12px;
+.waitlist-form {
+  margin-top: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: left;
+  display: grid;
+  gap: 18px;
+}
+
+.role-toggle {
+  border: none;
+  padding: 4px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: var(--bg-alt);
+  border-radius: 999px;
+}
+
+.role-toggle label {
+  position: relative;
+  cursor: pointer;
+}
+
+.role-toggle input {
+  position: absolute;
+  opacity: 0;
+}
+
+.role-toggle span {
+  display: block;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.role-toggle input:checked + span {
+  background: var(--ink);
+  color: #fff;
+}
+
+.role-toggle input:focus-visible + span {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.field input {
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--teal-dark);
+  background: #fff;
+}
+
+.form-status {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.form-status.success {
+  color: var(--teal-dark);
+}
+
+.form-status.error {
+  color: #c2410c;
+}
+
+.waitlist-alt {
+  margin-top: 24px;
+  font-size: 0.9rem;
 }
 
 /* Footer */
@@ -393,6 +706,11 @@ a {
   color: rgba(255, 255, 255, 0.55);
 }
 
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
 .footer-links a {
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
@@ -409,8 +727,21 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .founder-grid {
+  .founder-grid,
+  .steps,
+  .audience-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-paths,
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .waitlist-form {
+    padding: 20px;
   }
 }
 
